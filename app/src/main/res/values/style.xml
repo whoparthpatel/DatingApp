@@ -8,7 +8,14 @@
 
     <style name="Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+        <item name="cornerSize">@dimen/_16sdp</item>
+    </style>
+
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#2c6394</item>
+        <item name="hintTextColor">#2c6394</item>
+        <item name="android:textSize">@dimen/_15sdp</item>
+        <item name="boxStrokeWidth">@dimen/_1sdp</item>
     </style>
 
 

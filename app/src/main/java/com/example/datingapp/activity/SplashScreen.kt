@@ -37,7 +37,7 @@ class SplashScreen : ComponentActivity() {
     private fun newActivity() {
         val i = Intent(this,LogInActivity::class.java)
         startActivity(i)
-        this.overridePendingTransition(R.anim.fadein, R.anim.fadeout)
+        this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         finish()
     }
 }
