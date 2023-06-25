@@ -17,7 +17,7 @@
     android:textColor="@color/blue"
     android:textFontWeight="700"
     android:layout_marginLeft="@dimen/_20sdp"
-    android:layout_marginTop="@dimen/_160sdp"
+    android:layout_marginTop="@dimen/_100sdp"
     />
 
     <TextView
@@ -60,22 +60,26 @@
         />
 
     <Button
+        android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_marginTop="@dimen/_130sdp"
         android:backgroundTint="@color/blue"
         android:background="@drawable/button_background"
+        android:textAllCaps="false"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:text="Login"
         />
     <Button
+        android:id="@+id/signup_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:textColor="@color/blue"
         android:background="@drawable/button_background"
+        android:textAllCaps="false"
         android:text="Sign Up"
         />
 

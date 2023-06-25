@@ -1,27 +1,22 @@
 package com.example.datingapp.activity
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.datingapp.R
-import com.example.datingapp.databinding.ActivitySplashScreenBinding
+import com.example.datingapp.databinding.ActivitySelectMakeProfileBinding
 
-
-
-@SuppressLint("CustomSplashScreen")
-class SplashScreen : ComponentActivity() {
-    private lateinit var binding: ActivitySplashScreenBinding
+class SelectMakeProfileActivity : ComponentActivity() {
+    private lateinit var binding: ActivitySelectMakeProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_splash_screen)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_select_make_profile)
         init()
     }
     private fun init() {
@@ -30,14 +25,12 @@ class SplashScreen : ComponentActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, com.example.datingapp.R.color.white)
 
-        Handler().postDelayed({
-                newActivity()
-        }, 2000)
-    }
-    private fun newActivity() {
-        val i = Intent(this,SelectEnterActivity::class.java)
-        startActivity(i)
-        this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-        finish()
+        binding.makeProfile.setOnClickListener {
+            val i = Intent(this,SplashScreen::class.java)
+            startActivity(i)
+            this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
+        }
+
     }
 }

@@ -11,34 +11,37 @@ import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.datingapp.R
-import com.example.datingapp.databinding.ActivityLogInBinding
+import com.example.datingapp.databinding.ActivitySignUpBinding
 
-class LogInActivity : ComponentActivity() {
-    private lateinit var binding: ActivityLogInBinding
+class SignUpActivity : ComponentActivity() {
+    private lateinit var binding: ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_log_in)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_sign_up)
         init()
     }
     private fun init() {
+        binding.customeToolbar.title.text = "Sign Up"
         val window: Window = this.window
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, com.example.datingapp.R.color.white)
 
-
-        binding.loginBtn.setOnClickListener {
-            Toast.makeText(this,"it is working",Toast.LENGTH_SHORT).show()
-        }
-        binding.forgotPassword.setOnClickListener {
-            Toast.makeText(this,"it is working",Toast.LENGTH_SHORT).show()
-        }
-        binding.signupBtn.setOnClickListener {
-            val i = Intent(this,SignUpActivity::class.java)
+        binding.loginTxt.setOnClickListener {
+            val i = Intent(this,LogInActivity::class.java)
             startActivity(i)
             this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()
         }
+
+        binding.signupBtn.setOnClickListener {
+            val i = Intent(this,SelectMakeProfileActivity::class.java)
+            startActivity(i)
+            this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
+            Toast.makeText(this,"it is a working",Toast.LENGTH_SHORT).show()
+        }
+
         binding.customeToolbar.backBtn.setOnClickListener {
             val i = Intent(this,SelectEnterActivity::class.java)
             startActivity(i)

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SelectMakeProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:text="No more"
+        android:textSize="@dimen/_42ssp"
+        android:textColor="@color/blue"
+        android:textFontWeight="700"
+        android:layout_marginLeft="@dimen/_20sdp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lonely days!"
+        android:textSize="@dimen/_42ssp"
+        android:textColor="@color/blue"
+        android:textFontWeight="700"
+        android:layout_marginLeft="@dimen/_20sdp"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get coupled"
+            android:textSize="@dimen/_42ssp"
+            android:textColor="@color/blue"
+            android:textFontWeight="700"
+            android:layout_marginLeft="@dimen/_20sdp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dating app where you can find"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="genuine matches. Whether you want"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to make meaningful connection"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="chat and meet new friends."
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"
+            />
+
+        <Button
+            android:id="@+id/make_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue"
+            android:textAllCaps="false"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="@dimen/_230sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:text="Make a profile"
+            />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

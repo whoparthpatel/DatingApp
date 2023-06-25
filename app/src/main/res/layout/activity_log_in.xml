@@ -10,6 +10,7 @@
     tools:context=".activity.LogInActivity">
 
     <include
+        android:id="@+id/custome_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/custome_toolbar" />
@@ -24,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40ssp"
+            android:layout_marginTop="@dimen/_40sdp"
             android:text="Log into"
             android:textSize="@dimen/_42ssp"
             android:textColor="@color/blue"
@@ -84,6 +85,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:id="@+id/forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Forgot password ?"
@@ -94,11 +96,13 @@
             />
 
         <Button
+            android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:backgroundTint="@color/blue"
             android:background="@drawable/button_background"
+            android:textAllCaps="false"
             android:layout_marginTop="@dimen/_18sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:text="Login"
@@ -139,11 +143,13 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/signup_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_12sdp"
             android:textColor="@color/blue"
+            android:textAllCaps="false"
             android:background="@drawable/button_background"
             android:text="Sign Up with Email"
             />

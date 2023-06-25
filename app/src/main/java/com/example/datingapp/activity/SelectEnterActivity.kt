@@ -1,6 +1,7 @@
 package com.example.datingapp.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
@@ -24,5 +25,19 @@ class SelectEnterActivity : ComponentActivity() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, com.example.datingapp.R.color.white)
+
+        binding.loginBtn.setOnClickListener {
+            val i = Intent(this,LogInActivity::class.java)
+            startActivity(i)
+            this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
+        }
+        binding.signupBtn.setOnClickListener {
+            val i = Intent(this,SignUpActivity::class.java)
+            startActivity(i)
+            this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
+        }
+
     }
 }
