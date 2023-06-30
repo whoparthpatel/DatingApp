@@ -1,10 +1,11 @@
 package com.example.datingapp.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -13,9 +14,11 @@ import com.example.datingapp.databinding.ActivityEdtProfileBinding
 
 class EdtProfileActivity : ComponentActivity() {
     private lateinit var binding: ActivityEdtProfileBinding
+    private lateinit var animation: Animation
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_edt_profile)
+        animation = AnimationUtils.loadAnimation(this,R.anim.bounce)
         init()
     }
     private fun init() {
@@ -31,6 +34,8 @@ class EdtProfileActivity : ComponentActivity() {
             this.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
             finish()
         }
-
+        binding.signupBtn.setOnClickListener {
+            binding.signupBtn.startAnimation(animation)
+        }
     }
 }

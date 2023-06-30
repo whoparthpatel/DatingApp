@@ -11,5 +11,7 @@
     <color name="blue">#2c6394</color>
     <color name="colorPrimary">#013888</color>
     <color name="grayTextColor">#a8acaf</color>
-
+    <color name="red">#FF0000</color>
+    <color name="colorPrimaryDark">#006d2d</color>
+    <color name="colorAccent">#55cf86</color>
 </resources>

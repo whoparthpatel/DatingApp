@@ -15,6 +15,7 @@ import com.example.datingapp.databinding.ActivitySignUpBinding
 
 class SignUpActivity : ComponentActivity() {
     private lateinit var binding: ActivitySignUpBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_sign_up)
@@ -35,10 +36,7 @@ class SignUpActivity : ComponentActivity() {
         }
 
         binding.signupBtn.setOnClickListener {
-            val i = Intent(this,SelectMakeProfileActivity::class.java)
-            startActivity(i)
-            this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-            finish()
+
             Toast.makeText(this,"it is a working",Toast.LENGTH_SHORT).show()
         }
 
@@ -48,6 +46,5 @@ class SignUpActivity : ComponentActivity() {
             this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()
         }
-
     }
 }

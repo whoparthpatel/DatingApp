@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 <LinearLayout
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -14,6 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/custome_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,8 +48,8 @@
             android:layout_marginLeft="@dimen/_20sdp"
             />
 
-
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Email_layout"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
@@ -55,16 +60,14 @@
             android:hint="Email">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_edt"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@drawable/color_dr"
                 android:inputType="textEmailAddress" />
 
-
         </com.google.android.material.textfield.TextInputLayout>
-
-
         <com.google.android.material.textfield.TextInputLayout
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             style="@style/LoginTextInputLayoutStyle"
@@ -76,11 +79,12 @@
             android:hint="Password">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pass_Edt"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@drawable/color_dr"
-                android:inputType="textEmailAddress" />
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,16 +101,20 @@
 
         <Button
             android:id="@+id/login_btn"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:backgroundTint="@color/blue"
             android:background="@drawable/button_background"
             android:textAllCaps="false"
+            android:clickable="true"
+            android:enabled="true"
             android:layout_marginTop="@dimen/_18sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:text="Login"
             />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -148,12 +156,11 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_12sdp"
-            android:textColor="@color/blue"
-            android:textAllCaps="false"
             android:background="@drawable/button_background"
             android:text="Sign Up with Email"
-            />
-
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            tools:ignore="TextSizeCheck" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -166,6 +173,7 @@
             />
         
     </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
 </layout>

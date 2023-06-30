@@ -15,6 +15,9 @@
         android:layout_height="wrap_content"
         layout="@layout/custome_toolbar" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,6 +58,7 @@
             android:hint="First Name">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/first_Edt"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,6 +77,7 @@
             android:hint="Last Name">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/last_Edt"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -92,6 +97,7 @@
             android:hint="Email">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_Edt"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,6 +117,7 @@
             android:hint="Password">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pass_Edt"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,6 +137,7 @@
             android:hint="Re enter Password">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/repass_Edt"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -185,7 +193,7 @@
             tools:ignore="HardcodedText" />
 
     </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>
 </layout>

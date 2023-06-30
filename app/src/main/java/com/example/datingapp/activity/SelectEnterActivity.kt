@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -15,8 +17,11 @@ import com.example.datingapp.databinding.ActivitySelectEnterBinding
 
 class SelectEnterActivity : ComponentActivity() {
     private lateinit var binding: ActivitySelectEnterBinding
+    private lateinit var animation: Animation
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        animation = AnimationUtils.loadAnimation(this,R.anim.bounce)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_select_enter)
         init()
     }
@@ -27,12 +32,14 @@ class SelectEnterActivity : ComponentActivity() {
         window.statusBarColor = ContextCompat.getColor(this, com.example.datingapp.R.color.white)
 
         binding.loginBtn.setOnClickListener {
+            binding.loginBtn.startAnimation(animation)
             val i = Intent(this,LogInActivity::class.java)
             startActivity(i)
             this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()
         }
         binding.signupBtn.setOnClickListener {
+            binding.signupBtn.startAnimation(animation)
             val i = Intent(this,SignUpActivity::class.java)
             startActivity(i)
             this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
