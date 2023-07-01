@@ -2,8 +2,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <include
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/custome_loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/progress" />
 <LinearLayout
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.SignUpActivity">
@@ -65,13 +81,19 @@
                 android:textCursorDrawable="@drawable/color_dr"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
-
+        <TextView
+            android:id="@+id/firstname_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_33sdp"
+            android:textColor="@color/red"
+            />
         <com.google.android.material.textfield.TextInputLayout
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
             app:shapeAppearance="@style/Rounded"
             android:hint="Last Name">
@@ -85,13 +107,19 @@
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
+        <TextView
+            android:id="@+id/lastname_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_33sdp"
+            android:textColor="@color/red"
+            />
         <com.google.android.material.textfield.TextInputLayout
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
             app:shapeAppearance="@style/Rounded"
             android:hint="Email">
@@ -105,15 +133,22 @@
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
+        <TextView
+            android:id="@+id/mail_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_33sdp"
+            android:textColor="@color/red"
+            />
         <com.google.android.material.textfield.TextInputLayout
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
             app:shapeAppearance="@style/Rounded"
+            app:passwordToggleEnabled="true"
             android:hint="Password">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -125,15 +160,22 @@
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
+        <TextView
+            android:id="@+id/pass_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_33sdp"
+            android:textColor="@color/red"
+            />
         <com.google.android.material.textfield.TextInputLayout
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
             app:shapeAppearance="@style/Rounded"
+            app:passwordToggleEnabled="true"
             android:hint="Re enter Password">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -145,7 +187,14 @@
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
+        <TextView
+            android:id="@+id/repass_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_33sdp"
+            android:textColor="@color/red"
+            />
         <Button
             android:id="@+id/signup_btn"
             android:layout_width="match_parent"
@@ -196,4 +245,5 @@
     </ScrollView>
 
 </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

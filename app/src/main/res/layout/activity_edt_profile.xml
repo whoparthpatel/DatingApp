@@ -2,7 +2,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <include
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/custome_loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/progress" />
+
 <LinearLayout
+    android:id="@+id/root_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -75,41 +92,67 @@
             android:hint="Name">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fullname"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@drawable/color_dr"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/name_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_33sdp"
+            android:textColor="@color/red"
+            />
+
         <com.google.android.material.textfield.TextInputLayout
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
+            android:enabled="true"
+            android:clickable="true"
             app:shapeAppearance="@style/Rounded"
             android:hint="Date Of Birth">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dob"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@drawable/color_dr"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/dob_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_33sdp"
+            android:textColor="@color/red"
+            />
+
         <com.google.android.material.textfield.TextInputLayout
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
             app:shapeAppearance="@style/Rounded"
             android:hint="Phone">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone_numbert"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,7 +160,14 @@
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
+        <TextView
+            android:id="@+id/phone_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_33sdp"
+            android:textColor="@color/red"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,16 +180,19 @@
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="@dimen/_135sdp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginLeft="@dimen/_20sdp"
                 app:shapeAppearance="@style/Rounded"
+                android:clickable="false"
                 android:hint="Gender">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/gender"
                     style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textCursorDrawable="@drawable/color_dr"
+                    android:imeOptions="actionDone"
+                    android:clickable="false"
+                    android:focusable="true"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -149,19 +202,37 @@
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="@dimen/_115sdp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginLeft="@dimen/_14sdp"
                 app:shapeAppearance="@style/Rounded"
-                android:hint="Gender">
+                android:enabled="true"
+                android:clickable="true"
+                android:hint="Age">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ageEdt"
                     style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:textCursorDrawable="@drawable/color_dr"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/gender_erroe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:layout_marginLeft="@dimen/_100sdp"/>
 
         </LinearLayout>
 
@@ -170,31 +241,12 @@
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            app:shapeAppearance="@style/Rounded"
-            android:hint="Sexuality">
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textCursorDrawable="@drawable/color_dr"
-                android:inputType="text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-            style="@style/LoginTextInputLayoutStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
             app:shapeAppearance="@style/Rounded"
             android:hint="Hobbies">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/hobbies"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -202,7 +254,14 @@
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
+        <TextView
+            android:id="@+id/hobbi_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_33sdp"
+            android:textColor="@color/red"
+            />
         <Button
             android:id="@+id/signup_btn"
             android:layout_width="match_parent"
@@ -222,4 +281,5 @@
     </LinearLayout>
     </ScrollView>
 </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

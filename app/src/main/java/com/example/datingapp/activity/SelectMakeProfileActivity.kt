@@ -3,6 +3,8 @@ package com.example.datingapp.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.Animation
@@ -31,10 +33,15 @@ class SelectMakeProfileActivity : ComponentActivity() {
 
         binding.makeProfile.setOnClickListener {
             binding.makeProfile.startAnimation(animation)
-            val i = Intent(this,EdtProfileActivity::class.java)
-            startActivity(i)
-            this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-            finish()
+            Handler().postDelayed({
+                binding.rootLayout.visibility = View.GONE
+            }, 520)
+            Handler().postDelayed({
+                val i = Intent(this,EdtProfileActivity::class.java)
+                startActivity(i)
+                this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                finish()
+            }, 2000)
         }
 
     }
