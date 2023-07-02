@@ -62,6 +62,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_choise"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
             android:background="@drawable/circle"
@@ -177,23 +178,25 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-                style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="@dimen/_135sdp"
+                style="@style/DropDown"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_20sdp"
                 app:shapeAppearance="@style/Rounded"
-                android:clickable="false"
+                android:enabled="true"
+                android:clickable="true"
                 android:hint="Gender">
 
                 <AutoCompleteTextView
-                    android:id="@+id/gender"
                     style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                    android:id="@+id/gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionDone"
                     android:clickable="false"
-                    android:focusable="true"
-                    android:inputType="text" />
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -243,11 +246,12 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
             app:shapeAppearance="@style/Rounded"
-            android:hint="Hobbies">
+            android:hint="Bio">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/hobbies"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                android:maxLines="2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@drawable/color_dr"

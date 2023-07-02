@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "490129821594",
+    "project_id": "hookup-2003",
+    "storage_bucket": "hookup-2003.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490129821594:android:aad3edc6c738bde208f423",
+        "android_client_info": {
+          "package_name": "com.example.datingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490129821594-f7c37pu6097apmaq50d5b4l32kikiiji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-t5chWPYp3EGjkdq5_957NxdagII3TJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490129821594-f7c37pu6097apmaq50d5b4l32kikiiji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

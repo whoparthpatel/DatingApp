@@ -2,6 +2,7 @@ package com.example.datingapp.activity
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -13,7 +14,6 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
-import android.widget.SpinnerAdapter
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -24,13 +24,15 @@ import java.util.Calendar
 class EdtProfileActivity : ComponentActivity() {
     private lateinit var binding: ActivityEdtProfileBinding
     private lateinit var animation: Animation
+    private lateinit var uri : Uri
     private val phonenumberregex = "[0-9]{10}"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_edt_profile)
         init()
         removerror()
+
+
     }
     private fun init() {
         binding.customeToolbar.title.text = "Profile"
@@ -38,6 +40,11 @@ class EdtProfileActivity : ComponentActivity() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, com.example.datingapp.R.color.white)
+
+        val gender = resources.getStringArray(R.array.gender)
+        val arrayAdapter = ArrayAdapter(this,R.layout.drop_item, gender)
+        binding.gender.setAdapter(arrayAdapter)
+
         binding.customeToolbar.backBtn.setOnClickListener {
             val i = Intent(this,SplashScreen::class.java)
             startActivity(i)
