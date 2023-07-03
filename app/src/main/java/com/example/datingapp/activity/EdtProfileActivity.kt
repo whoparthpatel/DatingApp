@@ -1,24 +1,36 @@
 package com.example.datingapp.activity
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.datingapp.R
 import com.example.datingapp.databinding.ActivityEdtProfileBinding
+import com.example.datingapp.model.UsersDataClass
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import java.util.Calendar
 
 class EdtProfileActivity : ComponentActivity() {
@@ -26,13 +38,14 @@ class EdtProfileActivity : ComponentActivity() {
     private lateinit var animation: Animation
     private lateinit var uri : Uri
     private val phonenumberregex = "[0-9]{10}"
+    private lateinit var dbRef : DatabaseReference
+    private var storage = Firebase.storage
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_edt_profile)
         init()
         removerror()
-
-
     }
     private fun init() {
         binding.customeToolbar.title.text = "Profile"
@@ -40,6 +53,24 @@ class EdtProfileActivity : ComponentActivity() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, com.example.datingapp.R.color.white)
+
+        storage = FirebaseStorage.getInstance()
+
+        val gallaryImage = registerForActivityResult(
+            ActivityResultContracts.GetContent(),
+            ActivityResultCallback {
+                binding.profileImage.setImageURI(it)
+                if (it != null) {
+                    uri = it
+                } else {
+                    Toast.makeText(this,"Please Select Image",Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+
+        binding.imgChoise.setOnClickListener {
+            gallaryImage.launch("image/*")
+        }
 
         val gender = resources.getStringArray(R.array.gender)
         val arrayAdapter = ArrayAdapter(this,R.layout.drop_item, gender)
@@ -51,7 +82,7 @@ class EdtProfileActivity : ComponentActivity() {
             this.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
             finish()
         }
-        binding.signupBtn.setOnClickListener {
+        binding.SaveProfile.setOnClickListener {
             validaton()
         }
         binding.dob.setOnClickListener {
@@ -81,17 +112,73 @@ class EdtProfileActivity : ComponentActivity() {
             error = false
         }
         if (error) {
+            hideKeyboard()
             animation = AnimationUtils.loadAnimation(this,R.anim.bounce)
-            binding.signupBtn.startAnimation(animation)
-            Handler().postDelayed({
-                binding.rootLayout.visibility = View.GONE
-            }, 520)
-            Handler().postDelayed({
-                val i = Intent(this,LogInActivity::class.java)
-                startActivity(i)
-                this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                finish()
-            }, 2000)
+            binding.SaveProfile.startAnimation(animation)
+            val fname = intent.getStringExtra("fname")
+            val lname = intent.getStringExtra("lname")
+            val email = intent.getStringExtra("email")
+            val password = intent.getStringExtra("password")
+            val repassword = intent.getStringExtra("repassword")
+            val name = binding.fullname.text.toString()
+            val dob = binding.dob.text.toString()
+            val phone = binding.phoneNumbert.text.toString()
+            val gender = binding.gender.text.toString()
+            val age = binding.ageEdt.text.toString()
+            val bio = binding.hobbies.text.toString()
+            storage = FirebaseStorage.getInstance()
+            storage.getReference("UserImages").child(System.currentTimeMillis().toString())
+                .putFile(uri)
+                .addOnSuccessListener { task ->
+                    task.metadata!!.reference!!.downloadUrl
+                        .addOnSuccessListener {
+                            dbRef = FirebaseDatabase.getInstance().getReference("Users")
+                            val userId = dbRef.push().key!!
+                            val user = UsersDataClass(
+                                userId,
+                                fname,
+                                lname,
+                                email,
+                                password,
+                                repassword,
+                                name,
+                                dob,
+                                phone,
+                                gender,
+                                age,
+                                bio,
+                                it.toString()
+                            )
+                            dbRef.child(userId).setValue(user)
+                                .addOnCompleteListener {
+                                    Toast.makeText(
+                                        this,
+                                        "DATA SAVE SUCCESFULLY",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }.addOnFailureListener {
+                                    Toast.makeText(
+                                        this,
+                                        "ERROR{${it.message}}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            Handler().postDelayed({
+                                binding.rootLayout.visibility = View.GONE
+                            }, 520)
+                            Handler().postDelayed({
+                                val i = Intent(this, LogInActivity::class.java)
+                                startActivity(i)
+                                this.overridePendingTransition(
+                                    R.anim.slide_in_right,
+                                    R.anim.slide_out_left
+                                )
+                                finish()
+                            }, 2000)
+                        }
+                }.addOnFailureListener {
+                    Toast.makeText(applicationContext, "FAIL", Toast.LENGTH_SHORT).show()
+                }
         }
     }
     fun removerror() {
@@ -137,7 +224,7 @@ class EdtProfileActivity : ComponentActivity() {
         val currentMonth = calendar.get(Calendar.MONTH)
         val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val minYear = 2003
+        val minYear = 1990
         val maxYear = 2023
 
         val datePickerDialog = DatePickerDialog(
@@ -179,5 +266,12 @@ class EdtProfileActivity : ComponentActivity() {
         }
 
         return age
+    }
+    private fun hideKeyboard() {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentFocusView = currentFocus
+        if (currentFocusView != null) {
+            inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, 0)
+        }
     }
 }

@@ -32,12 +32,22 @@ class SelectMakeProfileActivity : ComponentActivity() {
         window.statusBarColor = ContextCompat.getColor(this, com.example.datingapp.R.color.white)
 
         binding.makeProfile.setOnClickListener {
+            val fname = intent.getStringExtra("fname")
+            val lname = intent.getStringExtra("lname")
+            val email = intent.getStringExtra("email")
+            val password = intent.getStringExtra("password")
+            val repassword = intent.getStringExtra("repassword")
             binding.makeProfile.startAnimation(animation)
             Handler().postDelayed({
                 binding.rootLayout.visibility = View.GONE
             }, 520)
             Handler().postDelayed({
                 val i = Intent(this,EdtProfileActivity::class.java)
+                i.putExtra("fname",fname)
+                i.putExtra("lname",lname)
+                i.putExtra("email",email)
+                i.putExtra("password",password)
+                i.putExtra("repassword",repassword)
                 startActivity(i)
                 this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 finish()

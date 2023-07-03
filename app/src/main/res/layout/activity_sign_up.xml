@@ -75,6 +75,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/first_Edt"
+                android:text="test"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,6 +101,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/last_Edt"
+                android:text="test"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -126,6 +128,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_Edt"
+                android:text="test@gmail.com"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,6 +156,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pass_Edt"
+                android:text="123@"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -180,6 +184,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/repass_Edt"
+                android:text="123@"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

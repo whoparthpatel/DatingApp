@@ -19,6 +19,13 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.datingapp.R
 import com.example.datingapp.databinding.ActivityLogInBinding
+import com.example.datingapp.model.UsersDataClass
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
+import com.google.firebase.database.ValueEventListener
 
 
 class LogInActivity : ComponentActivity() {
@@ -26,6 +33,8 @@ class LogInActivity : ComponentActivity() {
     private lateinit var animation: Animation
     private val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$"
     private val specialchar = "(?=.*[@#$%^&+=])" + ".{4,}" + "$"
+    private lateinit var dbRef : DatabaseReference
+
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,17 +87,53 @@ class LogInActivity : ComponentActivity() {
             error = false
         }
          if (error) {
-            animation = AnimationUtils.loadAnimation(this, R.anim.bounce)
-            binding.loginBtn.startAnimation(animation)
-            Handler().postDelayed({
-                binding.rootLayout.visibility = View.GONE
-            }, 520)
-            Handler().postDelayed({
-                val i = Intent(this, MainActivity::class.java)
-                startActivity(i)
-                this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                finish()
-            }, 2000)
+             val email = binding.emailEdt.text.toString()
+             val password = binding.passEdt.text.toString()
+             var flag = true
+             dbRef =  FirebaseDatabase.getInstance().getReference("Users")
+             dbRef.orderByChild("emali").equalTo(email).addListenerForSingleValueEvent(object :
+                 ValueEventListener {
+                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+                     if (dataSnapshot.exists()) {
+                         for (ds in dataSnapshot.children) {
+                             val user = ds.getValue(UsersDataClass::class.java)
+                             if (password.equals(user?.password)) {
+                                 flag = false
+                                 animation =
+                                     AnimationUtils.loadAnimation(applicationContext, R.anim.bounce)
+                                 binding.loginBtn.startAnimation(animation)
+                                 Handler().postDelayed({
+                                     binding.rootLayout.visibility = View.GONE
+                                 }, 520)
+                                 Handler().postDelayed({
+                                     val i = Intent(applicationContext, MainActivity::class.java)
+                                     val id = user?.userId
+                                     i.putExtra("userid",id)
+                                     startActivity(i)
+                                     overridePendingTransition(
+                                         R.anim.slide_in_right,
+                                         R.anim.slide_out_left
+                                     )
+                                     finish()
+                                 }, 2000)
+                             } else {
+                                 binding.EmailError.text = "Please enter valid email"
+                                 binding.PassError.text = "Please enter valid password"
+                             }
+                         }
+                     } else {
+                         binding.EmailError.text = "Please enter valid email"
+                         binding.PassError.text = "Please enter valid password"
+                     }
+
+                 }
+                 override fun onCancelled(databaseError: DatabaseError) {
+                     // Handle database error
+                     println("Database error: ${databaseError.message}")
+                     Toast.makeText(applicationContext,"bYYY ",Toast.LENGTH_SHORT).show();
+
+                 }
+             })
         }
     }
     fun removeerror() {

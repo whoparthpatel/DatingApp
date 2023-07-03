@@ -1,5 +1,6 @@
 package com.example.datingapp.activity
 
+import android.content.Context
 import android.content.Intent
 import android.database.DatabaseUtils
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
@@ -78,6 +80,12 @@ class SignUpActivity : ComponentActivity() {
             error = false
         }
         if (error) {
+            hideKeyboard()
+            val fname = binding.firstEdt.text.toString()
+            val lname = binding.lastEdt.text.toString()
+            val email = binding.emailEdt.text.toString()
+            val password = binding.passEdt.text.toString()
+            val repassword = binding.repassEdt.text.toString()
             animation = AnimationUtils.loadAnimation(this, R.anim.bounce)
             binding.signupBtn.startAnimation(animation)
             Handler().postDelayed({
@@ -85,6 +93,11 @@ class SignUpActivity : ComponentActivity() {
             }, 520)
             Handler().postDelayed({
                 val i = Intent(this, SelectMakeProfileActivity::class.java)
+                i.putExtra("fname",fname)
+                i.putExtra("lname",lname)
+                i.putExtra("email",email)
+                i.putExtra("password",password)
+                i.putExtra("repassword",repassword)
                 startActivity(i)
                 this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 finish()
@@ -142,5 +155,12 @@ class SignUpActivity : ComponentActivity() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
         })
+    }
+    private fun hideKeyboard() {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentFocusView = currentFocus
+        if (currentFocusView != null) {
+            inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, 0)
+        }
     }
 }
