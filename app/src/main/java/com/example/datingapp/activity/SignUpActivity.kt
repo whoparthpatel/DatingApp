@@ -1,5 +1,6 @@
 package com.example.datingapp.activity
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.database.DatabaseUtils
@@ -8,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -20,11 +22,18 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.datingapp.R
 import com.example.datingapp.databinding.ActivitySignUpBinding
+import com.example.datingapp.model.UsersDataClass
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class SignUpActivity : ComponentActivity() {
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var animation: Animation
     private lateinit var password : String
+    private lateinit var dbRef : DatabaseReference
     private val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$"
     private val specialchar = "(?=.*[@#$%^&+=])" + ".{4,}" + "$"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,22 +95,37 @@ class SignUpActivity : ComponentActivity() {
             val email = binding.emailEdt.text.toString()
             val password = binding.passEdt.text.toString()
             val repassword = binding.repassEdt.text.toString()
-            animation = AnimationUtils.loadAnimation(this, R.anim.bounce)
-            binding.signupBtn.startAnimation(animation)
-            Handler().postDelayed({
-                binding.rootLayout.visibility = View.GONE
-            }, 520)
-            Handler().postDelayed({
-                val i = Intent(this, SelectMakeProfileActivity::class.java)
-                i.putExtra("fname",fname)
-                i.putExtra("lname",lname)
-                i.putExtra("email",email)
-                i.putExtra("password",password)
-                i.putExtra("repassword",repassword)
-                startActivity(i)
-                this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                finish()
-            }, 2000)
+            dbRef =  FirebaseDatabase.getInstance().getReference("Users")
+            val query = dbRef.orderByChild("emali").equalTo(email)
+            query.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        binding.mailError.text = "Email is already exists"
+                    } else {
+                        animation = AnimationUtils.loadAnimation(applicationContext, R.anim.bounce)
+                        binding.signupBtn.startAnimation(animation)
+                        Handler().postDelayed({
+                            binding.rootLayout.visibility = View.GONE
+                        }, 520)
+                        Handler().postDelayed({
+                            val i = Intent(applicationContext, SelectMakeProfileActivity::class.java)
+                            i.putExtra("fname",fname)
+                            i.putExtra("lname",lname)
+                            i.putExtra("email",email)
+                            i.putExtra("password",password)
+                            i.putExtra("repassword",repassword)
+                            startActivity(i)
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                            finish()
+                        }, 2000)
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle any errors that may occur during the query
+                    Log.e(TAG, "Error querying database: ${databaseError.message}")
+                }
+            })
+
         }
     }
     fun removerror() {
@@ -164,3 +188,6 @@ class SignUpActivity : ComponentActivity() {
         }
     }
 }
+
+
+

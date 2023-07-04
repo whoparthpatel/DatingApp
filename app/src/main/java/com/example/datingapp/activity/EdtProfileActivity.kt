@@ -40,10 +40,13 @@ class EdtProfileActivity : ComponentActivity() {
     private val phonenumberregex = "[0-9]{10}"
     private lateinit var dbRef : DatabaseReference
     private var storage = Firebase.storage
+    private var url : String? = null
+    private var btn : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_edt_profile)
+        url = "https://firebasestorage.googleapis.com/v0/b/hookup-2003.appspot.com/o/UserImages%2F1688444934125?alt=media&token=41072022-e31b-43ad-8f4c-1d6e3639158f"
         init()
         removerror()
     }
@@ -53,25 +56,27 @@ class EdtProfileActivity : ComponentActivity() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, com.example.datingapp.R.color.white)
-
         storage = FirebaseStorage.getInstance()
-
         val gallaryImage = registerForActivityResult(
             ActivityResultContracts.GetContent(),
             ActivityResultCallback {
-                binding.profileImage.setImageURI(it)
                 if (it != null) {
                     uri = it
+                    binding.profileImage.setImageURI(uri)
+                    binding.SaveProfile.isEnabled = true
+                    btn = true
+                    Log.d("PARTH@@@@",it.toString())
                 } else {
-                    Toast.makeText(this,"Please Select Image",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"PLEASE SELECT IMAGE", Toast.LENGTH_SHORT).show()
+                    uri = Uri.parse(url)
+                    binding.SaveProfile.isEnabled = false
+                    Log.d("PARTH@",it.toString())
                 }
             }
         )
-
         binding.imgChoise.setOnClickListener {
             gallaryImage.launch("image/*")
         }
-
         val gender = resources.getStringArray(R.array.gender)
         val arrayAdapter = ArrayAdapter(this,R.layout.drop_item, gender)
         binding.gender.setAdapter(arrayAdapter)
@@ -111,10 +116,16 @@ class EdtProfileActivity : ComponentActivity() {
             binding.hobbiError.text = "It is required*"
             error = false
         }
-        if (error) {
-            hideKeyboard()
+        if (!btn) {
+            Toast.makeText(this,"PLEASE SELECT IMAGE", Toast.LENGTH_SHORT).show()
+        }
+        if (error && btn) {
             animation = AnimationUtils.loadAnimation(this,R.anim.bounce)
             binding.SaveProfile.startAnimation(animation)
+            Handler().postDelayed({
+                binding.rootLayout.visibility = View.GONE
+            }, 520)
+            hideKeyboard()
             val fname = intent.getStringExtra("fname")
             val lname = intent.getStringExtra("lname")
             val email = intent.getStringExtra("email")
@@ -164,9 +175,6 @@ class EdtProfileActivity : ComponentActivity() {
                                     ).show()
                                 }
                             Handler().postDelayed({
-                                binding.rootLayout.visibility = View.GONE
-                            }, 520)
-                            Handler().postDelayed({
                                 val i = Intent(this, LogInActivity::class.java)
                                 startActivity(i)
                                 this.overridePendingTransition(
@@ -185,6 +193,14 @@ class EdtProfileActivity : ComponentActivity() {
         binding.fullname.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 binding.nameError.text = ""
+            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            }
+        })
+        binding.dob.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                binding.dobError.text = ""
             }
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
