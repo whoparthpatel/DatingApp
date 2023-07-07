@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
-    <style name="Theme.DatingApp" parent="android:Theme.Material.Light.NoActionBar" >
+    <style name="Theme.DatingApp" parent="Theme.MaterialComponents.Light.NoActionBar" >
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowContentTransitions">true</item>
     </style>

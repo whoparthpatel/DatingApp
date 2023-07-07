@@ -106,7 +106,7 @@ class LogInActivity : ComponentActivity() {
                                      binding.rootLayout.visibility = View.GONE
                                  }, 520)
                                  Handler().postDelayed({
-                                     val i = Intent(applicationContext, MainActivity::class.java)
+                                     val i = Intent(applicationContext, HomeActivity::class.java)
                                      val id = user?.userId
                                      i.putExtra("userid",id)
                                      startActivity(i)
