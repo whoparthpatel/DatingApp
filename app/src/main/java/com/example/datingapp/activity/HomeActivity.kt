@@ -83,6 +83,7 @@ class HomeActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext,dob, Toast.LENGTH_SHORT).show()
             }
             override fun onCancelled(databaseError: DatabaseError) {
+
             }
         })
     }
