@@ -98,6 +98,6 @@ dependencies {
 //    CLOUD STORAGE DATABSE
     implementation("com.google.firebase:firebase-storage-ktx")
 
-//    BOTTOM NAVIGATION
-//    implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
+//    PICASSO FOR IMAGE URL
+    implementation 'com.squareup.picasso:picasso:2.8'
 }
