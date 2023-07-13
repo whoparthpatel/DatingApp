@@ -1,6 +1,10 @@
 package com.example.datingapp.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.preference.PreferenceManager
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -65,28 +69,48 @@ class HomeActivity : AppCompatActivity() {
         }
     }
     private fun init() {
+        val id = intent.getStringExtra("userid")
+        Log.d("USECASE",id.toString())
         binding.customeToolbar.backBtn.visibility = View.GONE
         val window: Window = this.window
         window.clearFlags(FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+        binding.customeToolbar.logoutBtn.setOnClickListener {
+            binding.rootLayout.visibility = View.GONE
+            Handler().postDelayed({
+                saveUserLoggedInState(false)
+                val i = Intent(this, LogInActivity::class.java)
+                startActivity(i)
+                overridePendingTransition(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left
+                )
+                finish()
+            }, 1500)
+        }
     }
 
-    private fun retriveData() {
-        val id = intent.getStringExtra("userid")
-        dbRef =  FirebaseDatabase.getInstance().getReference("Users")
-        val idReference = id?.let { dbRef.child(it) }
-        idReference?.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.getValue(UsersDataClass::class.java)
-                val dob =  value?.dob
-                Toast.makeText(applicationContext,dob, Toast.LENGTH_SHORT).show()
-            }
-            override fun onCancelled(databaseError: DatabaseError) {
-
-            }
-        })
+    private fun saveUserLoggedInState(isLoggedIn: Boolean){
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isLoggedIn", isLoggedIn)
+        editor.apply()
     }
+//    private fun retriveData() {
+//        dbRef =  FirebaseDatabase.getInstance().getReference("Users")
+//        val idReference = id?.let { dbRef.child(it) }
+//        idReference?.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                val value = dataSnapshot.getValue(UsersDataClass::class.java)
+//                val dob =  value?.dob
+//                Toast.makeText(applicationContext,dob, Toast.LENGTH_SHORT).show()
+//            }
+//            override fun onCancelled(databaseError: DatabaseError) {
+//
+//            }
+//        })
+//    }
 
     private  fun loadFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()

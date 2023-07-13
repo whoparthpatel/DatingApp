@@ -73,6 +73,7 @@
             android:layout_marginTop="@dimen/_24sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
             app:shapeAppearance="@style/Rounded"
+            android:textCursorDrawable="@drawable/color_dr"
             android:hint="Email">
 
             <com.google.android.material.textfield.TextInputEditText

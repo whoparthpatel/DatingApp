@@ -33,6 +33,7 @@ class SelectEnterActivity : ComponentActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, com.example.datingapp.R.color.white)
 
+
         binding.loginBtn.setOnClickListener {
             binding.loginBtn.startAnimation(animation)
             Handler().postDelayed({

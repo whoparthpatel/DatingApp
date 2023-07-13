@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.preference.PreferenceManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -24,7 +25,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 
 
@@ -46,6 +46,7 @@ class LogInActivity : ComponentActivity() {
     @SuppressLint("ResourceAsColor")
     @RequiresApi(Build.VERSION_CODES.M)
     private fun init() {
+        binding.customeToolbar.logoutBtn.visibility = View.GONE
         val window: Window = this.window
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -76,6 +77,12 @@ class LogInActivity : ComponentActivity() {
             finish()
         }
     }
+    private fun saveUserLoggedInState(isLoggedIn: Boolean){
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isLoggedIn", isLoggedIn)
+        editor.apply()
+    }
     fun validation() {
         var error = true
         if (binding.emailEdt.text?.isEmpty() == true) {
@@ -102,6 +109,7 @@ class LogInActivity : ComponentActivity() {
                                  animation =
                                      AnimationUtils.loadAnimation(applicationContext, R.anim.bounce)
                                  binding.loginBtn.startAnimation(animation)
+                                 saveUserLoggedInState(true)
                                  Handler().postDelayed({
                                      binding.rootLayout.visibility = View.GONE
                                  }, 520)

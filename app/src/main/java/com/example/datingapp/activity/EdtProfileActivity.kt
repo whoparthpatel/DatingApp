@@ -52,6 +52,7 @@ class EdtProfileActivity : ComponentActivity() {
     }
     private fun init() {
         binding.customeToolbar.title.text = "Profile"
+        binding.customeToolbar.logoutBtn.visibility = View.GONE
         val window: Window = this.window
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -281,7 +282,7 @@ class EdtProfileActivity : ComponentActivity() {
             age--
         }
 
-        return age
+        return age+1
     }
     private fun hideKeyboard() {
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

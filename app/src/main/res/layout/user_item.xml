@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:ignore="MissingConstraints">
 
 
     <androidx.cardview.widget.CardView
@@ -64,15 +70,40 @@
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="italic" />
 
-            <ImageView
-                android:id="@+id/like"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:src="@drawable/like"
-                android:layout_marginTop="@dimen/_7sdp"
+<!--            <ImageView-->
+<!--                android:id="@+id/like"-->
+<!--                android:layout_width="@dimen/_20sdp"-->
+<!--                android:layout_height="@dimen/_20sdp"-->
+<!--                android:src="@drawable/like"-->
+<!--                android:layout_marginTop="@dimen/_7sdp"-->
+<!--                android:layout_marginLeft="@dimen/_10sdp"-->
+<!--                android:layout_marginBottom="@dimen/_14sdp"-->
+<!--                />-->
+
+            <FrameLayout
+                android:id="@+id/likeContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_14sdp"
-                />
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_gravity="left">
+
+            <ImageView
+                android:id="@+id/likeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_heart_outline"
+                android:contentDescription="@string/like_icon" />
+
+            <ImageView
+                android:id="@+id/likeAnimation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/heart_animation"
+                android:contentDescription="@string/like_animation"
+                android:visibility="invisible" />
+
+            </FrameLayout>
 
         </LinearLayout>
 

@@ -43,6 +43,7 @@ class SignUpActivity : ComponentActivity() {
         removerror()
     }
     private fun init() {
+        binding.customeToolbar.logoutBtn.visibility = View.GONE
         binding.customeToolbar.title.text = "Sign Up"
         val window: Window = this.window
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
